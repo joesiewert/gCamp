@@ -9,7 +9,7 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>gCamp</title>
-    <%= stylesheet_link_tag    'application' %>
+    <%= stylesheet_link_tag 'application' %>
 
     <!-- Bootstrap core CSS -->
     <!-- <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -29,8 +29,6 @@
   </head>
 
   <body>
-
-    <%= yield %>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -40,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">gCamp</a>
+          <%= link_to "gCamp", root_url, class: "navbar-brand" %>
         </div>
         <!--<div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
@@ -56,76 +54,13 @@
       </div>
     </div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="container">
-      <div class="jumbotron">
-        <h1>gCamp</h1>
-        <p>Your life, organized.</p>
-        <!-- <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p> -->
-      </div>
-    </div>
+    <%= yield %>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <div class="row">
-            <img class="col-md-12" src="https://farm4.staticflickr.com/3757/8969238685_14dd418b01_n.jpg"/>
-          </div>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">Tasks</h3>
-            </div>
-            <div class="panel-body" style="height:150px">
-              <p>Grouped by projects and lists. Just the way you like'em.</p>
-              <!--<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>-->
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="row">
-            <img class="col-md-12" src="https://farm9.staticflickr.com/8263/8601795375_11d8a8fd4f_n.jpg"/>
-          </div>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">Documents</h3>
-            </div>
-            <div class="panel-body" style="height:150px">
-              <ul>
-                <li>Upload</li>
-                <li>Comment</li>
-                <li>Revise</li>
-              </ul>
-              <!--<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>-->
-            </div>
-          </div>
-       </div>
-        <div class="col-md-4">
-          <div class="row">
-            <img class="col-md-12" src="https://farm9.staticflickr.com/8482/8203794182_8004f8f636_n.jpg"/>
-          </div>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">Comments</h3>
-            </div>
-            <div class="panel-body" style="height:150px">
-              <ul>
-                <li>Comment on tasks and documents</li>
-                <li>Get email notifications</li>
-              </ul>
-              <!--<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>-->
-            </div>
-          </div>
-        </div>
-      </div>
+    <hr>
 
-      <hr>
-
-      <!--<footer>
-        <p>&copy; Company 2014</p>
-      </footer>-->
-    </div> <!-- /container -->
-
+    <footer>
+      <%= link_to "About", about_path %> | <%= link_to "Terms", terms_path %>
+    </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
