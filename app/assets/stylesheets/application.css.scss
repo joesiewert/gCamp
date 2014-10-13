@@ -17,6 +17,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.panel-default > .panel-heading {
-  background-color:#428BCA;
+.navbar {
+  background-color:#FF931F;
+}
+
+body {
+  padding:75px;
 }
