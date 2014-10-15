@@ -54,13 +54,13 @@
       </div>
     </div>
 
-    <%= yield %>
-
-    <hr>
-
-    <footer>
-      <%= link_to "About", about_path %> | <%= link_to "Terms", terms_path %>
-    </footer>
+    <div class="container">
+      <%= yield %>
+      <hr>
+      <footer>
+        <%= link_to "About", about_path %> | <%= link_to "Terms", terms_path %>
+      </footer>
+    </div><!-- /container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
