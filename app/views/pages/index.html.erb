@@ -61,9 +61,9 @@
     </div>
   </div>
     <% @quotes.each do |quote| %>
-      &quot;<%= quote[0] %>&quot;<br>
+      <p>&quot;<%= quote.text %>&quot;</p>
         <div class="text-muted">
-          <em><%= quote[1] %></em><br><br>
+          <p><em><%= quote.author %></em></p><br>
         </div>
     <% end %>
 </div><!-- /container -->
