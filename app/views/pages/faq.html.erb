@@ -1,0 +1,10 @@
+<h1>Frequently Asked Questions</h1>
+<br>
+<div class="row">
+  <div class="col-md-8">
+    <% @questions.each do |question| %>
+      <h4><%= question.text %></h4>
+      <p><%= question.answer %></p><br>
+    <% end %>
+  </div>
+</div>

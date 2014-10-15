@@ -17,4 +17,22 @@ class PagesController < ApplicationController
     @quotes = [quote1, quote2, quote3]
   end
 
+  def faq
+
+    question1 = Question.new
+    question1.text = "What is gCamp?"
+    question1.answer = "gCamp is an awesome tool that is going to change your life. gCamp is your one stop shop to organize all your tasks and documents. You'll also be able to track comments that you and others make. gCamp may eventually replace all need for paper and pens for the entire world. Well, maybe not, but it's going to be pretty cool."
+
+    question2 = Question.new
+    question2.text = "How do I join gCamp?"
+    question2.answer = "Right now, gCamp is still in development. So, there is not a sign up page open to the public, yet! Your best option is to become best friends with a gCamp developer. They can be found hanging around gSchool all day."
+
+    question3 = Question.new
+    question3.text = "When will gCamp be finished?"
+    question3.answer = "gCamp is a work in progress. That said, it should be fully functional by March 2015. Functional, but our developers will continue to improve the site for the foreseeable future. Check in daily for new features and awesome functionality. It's going to blow your mind."
+
+    @questions = [question1, question2, question3]
+
+  end
+
 end
