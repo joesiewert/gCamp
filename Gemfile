@@ -1,14 +1,13 @@
 source 'https://rubygems.org'
 
 group :production do
-  gem "pg"
   gem "rails_12factor"
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', group: :development
+# Use PostgreSQL as the database for Active Record
+gem 'pg'
 # Use Bootstrap
 gem 'bootstrap-sass', '~> 3.2.0'
 # Use SCSS for stylesheets
