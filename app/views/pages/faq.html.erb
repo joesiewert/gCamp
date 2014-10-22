@@ -2,9 +2,9 @@
 <br>
 <div class="row">
   <div class="col-md-8">
-    <% @questions.each do |question| %>
-      <h4><%= question.text %></h4>
-      <p><%= question.answer %></p><br>
+    <% @faqs.each do |faq| %>
+      <h4><%= faq.question %></h4>
+      <p><%= faq.answer %></p><br>
     <% end %>
   </div>
 </div>
