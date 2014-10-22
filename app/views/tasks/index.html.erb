@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th><h4>Description</h4></th>
-      <th colspan="3"></th>
+      <th><h4>Complete</h4></th>
     </tr>
   </thead>
 
@@ -14,6 +14,7 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.description %></td>
+        <td><%= task.complete.to_s.capitalize %></td>
         <td>
           <div class="pull-right">
             <%= link_to 'Show', task, class: "btn btn-success" %>
