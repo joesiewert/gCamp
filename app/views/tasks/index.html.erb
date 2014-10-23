@@ -7,6 +7,7 @@
     <tr>
       <th><h4>Description</h4></th>
       <th><h4>Complete</h4></th>
+      <th><h4>Due</h4></th>
     </tr>
   </thead>
 
@@ -15,6 +16,7 @@
       <tr>
         <td><%= task.description %></td>
         <td><%= task.complete.to_s.capitalize %></td>
+        <td><%= task.due_date %></td>
         <td>
           <div class="pull-right">
             <%= link_to 'Show', task, class: "btn btn-success" %>
