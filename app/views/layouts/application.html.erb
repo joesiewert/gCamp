@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>gCamp</title>
     <%= stylesheet_link_tag 'application' %>
@@ -60,7 +59,24 @@
       <%= yield %>
       <hr>
       <footer>
-        <%= link_to "About", about_path %> | <%= link_to "Terms", terms_path %> | <%= link_to "FAQ", faq_path %>
+        <%= link_to "About", about_path %> |
+        <%= link_to "Terms", terms_path %> |
+        <%= link_to "FAQ", faq_path %> |
+        <%= link_to "Tasks", tasks_path %>
+        <div class="pull-right">
+          <%= link_to "https://www.linkedin.com/in/joesiewert" do %>
+            <%= image_tag "linked_in.png", width: "20em" %>
+          <% end %>
+          <%= link_to "https://github.com/joesiewert" do %>
+            <%= image_tag "github.png", width: "20em" %>
+          <% end %>
+          <%= link_to "https://twitter.com/joesiewert" do %>
+            <%= image_tag "twitter.png", width: "20em" %>
+          <% end %>
+          <%= link_to "http://www.galvanize.it/school#main" do %>
+            <%= image_tag "gschool.png", width: "55em" %>
+          <% end %>
+        </div>
       </footer>
     </div><!-- /container -->
 
