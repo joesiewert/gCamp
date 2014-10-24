@@ -3,8 +3,8 @@
     Tasks
       <div class="pull-right">
         <small>
-          <%= link_to_unless_current "All", tasks_path(type: "all") %> |
-          <%= link_to_unless_current "Incomplete", tasks_path(type: "incomplete") %>
+          <%= link_to_if @sort_ref == "incomplete", "All", tasks_path(type: "all") %> |
+          <%= link_to_if @sort_ref == "all", "Incomplete", tasks_path(type: "incomplete") %>
         </small>
         <%= link_to "Create Task", new_task_path, class: "btn btn-primary" %>
       </div>
