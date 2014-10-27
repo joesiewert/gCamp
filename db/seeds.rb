@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Task.delete_all
+
+10.times do
+  task = Task.new
+  task.description = Faker::Lorem.sentence(1)
+  task.complete = [true, false].sample
+  task.due_date = Faker::Date.forward(14)
+  task.save
+end
