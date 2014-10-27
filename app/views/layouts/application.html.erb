@@ -23,6 +23,11 @@
     </div>
 
     <div class="container">
+      <% unless notice.nil? %>
+        <p id="notice" class="alert alert-success text-center">
+          <%= notice %>
+        </p>
+      <% end %>
       <%= yield %>
       <hr>
       <footer>
