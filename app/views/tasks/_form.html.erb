@@ -28,11 +28,13 @@
         <%= f.date_field :due_date, :class => "form-control" %>
       </div>
     </div>
-    <div class="form-group">
-      <div class="col-sm-offset-1 col-sm-2">
-        <%= f.check_box :complete %> <%= f.label :complete %>
+    <% unless @task.created_at.nil? %>
+      <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-2">
+          <%= f.check_box :complete %> <%= f.label :complete %>
+        </div>
       </div>
-    </div>
+    <% end %>
     <div class="form-group">
       <div class="col-sm-offset-1 col-sm-2">
         <%= f.submit :class => "btn btn-primary" %>
