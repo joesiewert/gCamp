@@ -15,3 +15,13 @@ Task.delete_all
   task.due_date = Faker::Date.forward(14)
   task.save
 end
+
+User.delete_all
+
+10.times do
+  user = User.new
+  user.first_name = Faker::Name.first_name
+  user.last_name = Faker::Name.last_name
+  user.email = Faker::Internet.free_email
+  user.save
+end
