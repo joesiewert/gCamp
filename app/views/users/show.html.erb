@@ -1,0 +1,17 @@
+<h1>
+  <%= "#{@user.first_name} #{@user.last_name}" %>
+  <div class="pull-right">
+    <%= link_to "Edit", edit_user_path, class: "btn btn-primary" %>
+  </div>
+</h1>
+
+<dl class="dl-horizontal">
+  <dt>First name:</dt>
+  <dd><%= @user.first_name %></dd>
+
+  <dt>Last name:</dt>
+  <dd><%= @user.last_name %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= mail_to @user.email %></dd>
+</dl>
