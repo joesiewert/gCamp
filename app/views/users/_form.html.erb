@@ -29,5 +29,12 @@
         <%= f.submit :class => "btn btn-primary" %>
       </div>
     </div>
+    <% unless @user.created_at.nil? %>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-5 well text-center">
+          <%= link_to "Delete User", user_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end %>
