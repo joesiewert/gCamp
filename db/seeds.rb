@@ -25,3 +25,11 @@ User.delete_all
   user.email = Faker::Internet.free_email
   user.save
 end
+
+Project.delete_all
+
+5.times do
+  project = Project.new
+  project.name = "#{Faker::App.name} #{Faker::App.version}"
+  project.save
+end
