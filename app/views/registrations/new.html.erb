@@ -1,0 +1,30 @@
+<%= form_for(@user) do |f| %>
+<div class="row">
+  <div class="well col-sm-offset-3 col-sm-6" role="form">
+    <h2>Sign Up for gCamp!</h2>
+    <div class="form-group">
+      <%= f.label :first_name, class: "control-label" %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :last_name, class: "control-label" %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, class: "control-label" %>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, class: "control-label" %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, class: "control-label" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Sign Up", class: "btn" %>
+    </div>
+  </div>
+</div>
+<% end %>
