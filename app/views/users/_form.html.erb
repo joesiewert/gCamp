@@ -1,5 +1,15 @@
 <%= form_for(@user) do |f| %>
   <div class="form-horizontal" role="form">
+
+    <% if @new_user_errors %>
+      <p class="text-danger">
+        <% @new_user_errors.each do |message| %>
+          <%= message %>
+          <br>
+        <% end %>
+      </p>
+    <% end %>
+
     <div class="form-group">
       <div class="col-sm-2">
         <%= f.label :first_name, :class => "control-label" %>
@@ -22,6 +32,22 @@
       </div>
       <div class="col-sm-5">
         <%= f.text_field :email, :class => "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-2">
+        <%= f.label :password, class: "control-label" %>
+      </div>
+      <div class="col-sm-5">
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-2">
+        <%= f.label :password_confirmation, class: "control-label" %>
+      </div>
+      <div class="col-sm-5">
+        <%= f.password_field :password_confirmation, class: "form-control" %>
       </div>
     </div>
     <div class="form-group">

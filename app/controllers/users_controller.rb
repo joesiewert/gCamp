@@ -19,9 +19,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      if @user.save
+      if @user.valid?
+        @user.save
         format.html { redirect_to users_path, notice: 'User was successfully created.' }
       else
+        @new_user_errors = @user.errors.full_messages
         format.html { render :new }
       end
     end
@@ -50,6 +52,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 end
