@@ -55,11 +55,15 @@ feature "Tasks" do
     expect(page).to have_content("Edited task")
     expect(page).to have_content("True")
     expect(page).to have_content("08/16/2014")
+    expect(page).to have_no_content("Edit task")
+    expect(page).to have_no_content("04/02/2014")
     click_on "Back"
     click_on "All"
     expect(page).to have_content("Edited task")
     expect(page).to have_content("True")
     expect(page).to have_content("08/16/2014")
+    expect(page).to have_no_content("Edit task")
+    expect(page).to have_no_content("04/02/2014")
   end
 
   scenario "User deletes a task" do

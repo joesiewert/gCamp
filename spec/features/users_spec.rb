@@ -29,7 +29,6 @@ feature "Users" do
 
     visit root_path
     click_on "Users"
-    expect(page).to have_content("Joe User")
     expect(page).to have_content("joe@user.com")
     click_on "Joe User"
     expect(page).to have_content("Joe User")
@@ -48,7 +47,6 @@ feature "Users" do
 
     visit root_path
     click_on "Users"
-    expect(page).to have_content("Joe User")
     expect(page).to have_content("joe@user.com")
     click_on "Joe User"
     click_on "Edit"
@@ -59,6 +57,8 @@ feature "Users" do
     expect(page).to have_content("User was successfully updated.")
     expect(page).to have_content("Jojo Tester")
     expect(page).to have_content("jojo@tester.com")
+    expect(page).to have_no_content("Joe User")
+    expect(page).to have_no_content("joe@user.com")
   end
 
   scenario "User deletes a user" do
