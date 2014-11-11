@@ -24,7 +24,7 @@ feature "Users" do
       first_name: "Joe",
       last_name: "User",
       email: "joe@user.com",
-      password_digest: "1234$!",
+      password: "1234$!",
     )
 
     visit root_path
@@ -42,7 +42,7 @@ feature "Users" do
       first_name: "Joe",
       last_name: "User",
       email: "joe@user.com",
-      password_digest: "1234$!",
+      password: "1234$!",
     )
 
     visit root_path
@@ -66,7 +66,7 @@ feature "Users" do
       first_name: "Joe",
       last_name: "User",
       email: "joe@user.com",
-      password_digest: "1234$!",
+      password: "1234$!",
     )
 
     visit root_path
