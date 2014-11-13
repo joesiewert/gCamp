@@ -26,6 +26,7 @@ feature "Tasks" do
     click_on "Create Task"
     fill_in "Due date", with: "15/12/2014"
     click_on "Create Task"
+    expect(page).to have_content("New task")
     expect(page).to have_content("Description can't be blank")
     click_on "Tasks"
     expect(page).to have_no_content("12/15/2014")
@@ -76,6 +77,27 @@ feature "Tasks" do
     expect(page).to have_content("08/16/2014")
     expect(page).to have_no_content("Edit task")
     expect(page).to have_no_content("04/02/2014")
+  end
+
+  scenario "User edits a task to have no description" do
+    Task.create!(
+      description: "Edit task",
+      due_date: "02/04/2014"
+    )
+
+    visit root_path
+    click_on "Tasks"
+    click_on "All"
+    expect(page).to have_content("Edit task")
+    expect(page).to have_content("04/02/2014")
+    click_on "Edit"
+    fill_in "Description", with: ""
+    click_on "Update Task"
+    expect(page).to have_content("Edit task")
+    expect(page).to have_content("Description can't be blank")
+    click_on "Tasks"
+    click_on "All"
+    expect(page).to have_content("Edit task")
   end
 
   scenario "User deletes a task" do
