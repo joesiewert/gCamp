@@ -3,6 +3,7 @@
 <%= form_for (@project) do |f| %>
 
   <div class="form-horizontal" role="form">
+    <%= render "shared/errors", record: @project %>
     <div class="form-group">
       <div class="col-sm-1">
         <%= f.label :name, :class => "control-label" %>

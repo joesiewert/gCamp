@@ -15,6 +15,15 @@ feature "Projects" do
     expect(page).to have_content("Amazeo 1.1")
   end
 
+  scenario "User creates a project without a name" do
+    visit root_path
+    click_on "Projects"
+    click_on "Create Project"
+    click_on "Create Project"
+    expect(page).to have_content("Create project")
+    expect(page).to have_content("Name can't be blank")
+  end
+
   scenario "User views a project" do
     Project.create!(
       name: "Amazeo 1.1"
@@ -43,6 +52,23 @@ feature "Projects" do
     click_on "Projects"
     expect(page).to have_content("Amazeo 1.2")
     expect(page).to have_no_content("Amazeo 1.1")
+  end
+
+  scenario "User edits a project to have no name" do
+    Project.create!(
+      name: "Amazeo 1.1"
+    )
+
+    visit root_path
+    click_on "Projects"
+    click_on "Amazeo 1.1"
+    click_on "Edit"
+    fill_in "Name", with: ""
+    click_on "Update Project"
+    expect(page).to have_content("Edit project")
+    expect(page).to have_content("Name can't be blank")
+    click_on "Projects"
+    expect(page).to have_content("Amazeo 1.1")
   end
 
   scenario "User deletes a project" do
