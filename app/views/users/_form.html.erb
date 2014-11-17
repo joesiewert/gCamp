@@ -1,15 +1,6 @@
 <%= form_for(@user) do |f| %>
   <div class="form-horizontal" role="form">
-
-    <% if @new_user_errors %>
-      <p class="text-danger">
-        <% @new_user_errors.each do |message| %>
-          <%= message %>
-          <br>
-        <% end %>
-      </p>
-    <% end %>
-
+    <%= render "shared/errors", record: @user %>
     <div class="form-group">
       <div class="col-sm-2">
         <%= f.label :first_name, :class => "control-label" %>

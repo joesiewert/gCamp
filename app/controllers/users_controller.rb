@@ -19,11 +19,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      if @user.valid?
-        @user.save
+      if @user.save
         format.html { redirect_to users_path, notice: 'User was successfully created.' }
       else
-        @new_user_errors = @user.errors.full_messages
         format.html { render :new }
       end
     end
