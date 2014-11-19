@@ -11,7 +11,9 @@ feature "Projects" do
     click_on "Create Project"
     expect(page).to have_content("Project was successfully created.")
     expect(page).to have_content("Amazeo 1.1")
-    click_on "Projects"
+    within(".breadcrumb") do
+      click_on "Projects"
+    end
     expect(page).to have_content("Amazeo 1.1")
   end
 
@@ -49,7 +51,9 @@ feature "Projects" do
     expect(page).to have_content("Project was successfully updated.")
     expect(page).to have_content("Amazeo 1.2")
     expect(page).to have_no_content("Amazeo 1.1")
-    click_on "Projects"
+    within(".breadcrumb") do
+      click_on "Projects"
+    end
     expect(page).to have_content("Amazeo 1.2")
     expect(page).to have_no_content("Amazeo 1.1")
   end
@@ -79,7 +83,7 @@ feature "Projects" do
     visit root_path
     click_on "Projects"
     click_on "Amazeo 1.1"
-    click_on "Delete"
+    click_on "Destroy"
     expect(page).to have_content("Project was successfully destroyed.")
     expect(page).to have_no_content("Amazeo 1.1")
   end
