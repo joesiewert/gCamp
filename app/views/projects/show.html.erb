@@ -2,6 +2,12 @@
   <%= @project.name %>
   <div class="pull-right">
     <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-primary" %>
-    <%= link_to 'Delete', project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    <%= link_to 'Destroy', project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
   </div>
 </h1>
+
+<ol class="breadcrumb">
+  <li><%= link_to "Projects", projects_path %></li>
+  <li class="active"><%= @project.name %></li>
+</ol>
+<%= link_to pluralize(@project.tasks.count, 'Task'), project_tasks_path(@project) %>

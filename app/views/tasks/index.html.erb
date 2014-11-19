@@ -1,15 +1,21 @@
 <div class="page-header">
   <h1>
-    Tasks
+    Tasks for <%= @project.name %>
       <div class="pull-right">
         <small>
-          <%= link_to_if @sort_ref == "incomplete", "All", tasks_path(type: "all") %> |
-          <%= link_to_if @sort_ref == "all", "Incomplete", tasks_path(type: "incomplete") %>
+          <%= link_to_if @sort_ref == "incomplete", "All", project_tasks_path(type: "all") %> |
+          <%= link_to_if @sort_ref == "all", "Incomplete", project_tasks_path(type: "incomplete") %>
         </small>
-        <%= link_to "Create Task", new_task_path, class: "btn btn-primary" %>
+        <%= link_to "Create Task", new_project_task_path, class: "btn btn-primary" %>
       </div>
   </h1>
 </div>
+
+<ol class="breadcrumb">
+  <li><%= link_to "Projects", projects_path %></li>
+  <li><%= link_to @project.name, project_path(@project) %></li>
+  <li class="active">Tasks</li>
+</ol>
 
 <table class="table">
   <thead>
@@ -28,9 +34,9 @@
         <td><%= task.due_date %></td>
         <td>
           <div class="pull-right">
-            <%= link_to 'Show', task, class: "btn btn-success" %>
-            <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
-            <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            <%= link_to 'Show', project_task_path(@project, task), class: "btn btn-success" %>
+            <%= link_to 'Edit', edit_project_task_path(@project, task), class: "btn btn-info" %>
+            <%= link_to 'Destroy', project_task_path(@project, task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
           </div>
         </td>
       </tr>
