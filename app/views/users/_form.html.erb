@@ -1,6 +1,10 @@
 <%= form_for(@user) do |f| %>
   <div class="form-horizontal" role="form">
-    <%= render "shared/errors", record: @user %>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-5">
+        <%= render "shared/errors", record: @user %>
+      </div>
+    </div>
     <div class="form-group">
       <div class="col-sm-2">
         <%= f.label :first_name, :class => "control-label" %>
