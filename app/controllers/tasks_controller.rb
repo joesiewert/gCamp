@@ -33,6 +33,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = @project.tasks.new(task_params)
+    @task.complete = false #New task can't be complete by default
 
     respond_to do |format|
       if @task.save
