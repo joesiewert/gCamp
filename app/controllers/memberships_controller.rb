@@ -2,11 +2,12 @@ class MembershipsController < ApplicationController
   before_action :set_project
 
   def index
-    @membership = @project.memberships.new
+    @membership = Membership.new
   end
 
   def create
-    @membership = @project.memberships.new(membership_params)
+    @membership = Membership.new(membership_params)
+    @membership.project = @project
     if @membership.save
       redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was added successfully."
     else
