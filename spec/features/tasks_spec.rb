@@ -24,11 +24,14 @@ feature "Tasks" do
     expect(page).to have_content("Task was successfully created.")
     expect(page).to have_content("Task 1")
     expect(page).to have_content(@test_date_expect)
-    click_on "Back"
-    click_on "All"
+    expect(page).to have_content("False")
+    within(".breadcrumb") do
+      click_on "Tasks"
+    end
     expect(page).to have_content("gCamp 1.1")
     expect(page).to have_content("Task 1")
     expect(page).to have_content(@test_date_expect)
+    expect(page).to have_content("False")
   end
 
   scenario "User creates a task without a description and date in past" do
@@ -51,7 +54,8 @@ feature "Tasks" do
     Task.create!(
       description: "Task 1",
       due_date: @test_date,
-      project_id: @project.id
+      project_id: @project.id,
+      complete: false
     )
 
     visit root_path
@@ -61,16 +65,19 @@ feature "Tasks" do
     click_on "All"
     expect(page).to have_content("Task 1")
     expect(page).to have_content(@test_date_expect)
-    click_on "Show"
+    expect(page).to have_content("False")
+    click_on "Task 1"
     expect(page).to have_content("Task 1")
     expect(page).to have_content(@test_date_expect)
+    expect(page).to have_content("False")
   end
 
   scenario "User edits a task" do
     Task.create!(
       description: "Task 1",
       due_date: @test_date,
-      project_id: @project.id
+      project_id: @project.id,
+      complete: false
     )
 
     visit root_path
@@ -80,6 +87,7 @@ feature "Tasks" do
     click_on "All"
     expect(page).to have_content("Task 1")
     expect(page).to have_content(@test_date_expect)
+    expect(page).to have_content("False")
     click_on "Edit"
     fill_in "Description", with: "Task 2"
     fill_in "Due date", with: @test_date + 1.day
@@ -91,20 +99,25 @@ feature "Tasks" do
     expect(page).to have_content((@test_date + 1.day).strftime("%m/%d/%Y"))
     expect(page).to have_no_content("Task 1")
     expect(page).to have_no_content(@test_date_expect)
-    click_on "Back"
+    expect(page).to have_no_content("False")
+    within(".breadcrumb") do
+      click_on "Tasks"
+    end
     click_on "All"
     expect(page).to have_content("Task 2")
     expect(page).to have_content("True")
     expect(page).to have_content((@test_date + 1.day).strftime("%m/%d/%Y"))
     expect(page).to have_no_content("Task 1")
     expect(page).to have_no_content(@test_date_expect)
+    expect(page).to have_no_content("False")
   end
 
   scenario "User edits a task to have no description" do
     Task.create!(
       description: "Task 1",
       due_date: @test_date,
-      project_id: @project.id
+      project_id: @project.id,
+      complete: false
     )
 
     visit root_path
@@ -114,6 +127,7 @@ feature "Tasks" do
     click_on "All"
     expect(page).to have_content("Task 1")
     expect(page).to have_content(@test_date_expect)
+    expect(page).to have_content("False")
     click_on "Edit"
     fill_in "Description", with: ""
     click_on "Update Task"
@@ -124,14 +138,16 @@ feature "Tasks" do
     click_on "1 Task"
     click_on "All"
     expect(page).to have_content("Task 1")
+    expect(page).to have_content(@test_date_expect)
+    expect(page).to have_content("False")
   end
 
   scenario "User deletes a task" do
     Task.create!(
       description: "Task 1",
       due_date: @test_date,
-      complete: false,
-      project_id: @project.id
+      project_id: @project.id,
+      complete: false
     )
 
     visit root_path
@@ -141,7 +157,7 @@ feature "Tasks" do
     expect(page).to have_content("Task 1")
     expect(page).to have_content("False")
     expect(page).to have_content(@test_date_expect)
-    click_on "Destroy"
+    find('.glyphicon').click
     expect(page).to have_content("Task was successfully destroyed.")
     click_on "All"
     expect(page).to have_no_content("Task 1")

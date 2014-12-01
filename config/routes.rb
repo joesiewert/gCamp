@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :projects do
-    resources :tasks
+    resources :tasks do
+      resources :comments, only: [:create]
+    end
     resources :memberships
   end
   resources :users
