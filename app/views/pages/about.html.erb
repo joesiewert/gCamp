@@ -1,5 +1,17 @@
-<div class="text-center">
-  <h1>About</h1>
-  <p>Get organized and increase productivity with your team.</p>
-  <%= image_tag "about.png" %>
+<h1>About</h1>
+<div class="row">
+  <div class="col-md-4">
+    <%= image_tag "about.png" %>
+  </div>
+  <div class="col-md-8">
+    <p>Get organized and increase productivity with your team.</p>
+    <p>gCamp is extremely active. Check out our stats below!</p>
+    <p>
+      <%= pluralize(Project.all.count, 'project') %>,
+      <%= pluralize(Task.all.count, 'task') %>,
+      <%= pluralize(Membership.all.count, 'project member') %>,
+      <%= pluralize(User.all.count, 'user') %> and
+      <%= pluralize(Comment.all.count, 'comment') %>.
+    </p>
+  </div>
 </div>
