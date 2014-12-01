@@ -2,7 +2,6 @@
   <%= @project.name %>
   <div class="pull-right">
     <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-primary" %>
-    <%= link_to 'Destroy', project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
   </div>
 </h1>
 
@@ -11,10 +10,19 @@
   <li class="active"><%= @project.name %></li>
 </ol>
 
-<div>
+<p>
   <%= link_to pluralize(@project.tasks.count, 'Task'), project_tasks_path(@project) %>
-</div>
+</p>
 
-<div>
+<p>
   <%= link_to pluralize(@project.memberships.count, 'Member'), project_memberships_path(@project) %>
+</p>
+
+<div class="col-md-12 well">
+  <p><strong>Delete Project</strong></p>
+  <p>
+    Deleting this project will also delete <%= pluralize(@project.memberships.count, 'membership') %>,
+    <%= pluralize(@project.tasks.count, 'task') %> and associated comments.
+  </p>
+  <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 </div>

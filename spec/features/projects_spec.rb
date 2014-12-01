@@ -83,7 +83,7 @@ feature "Projects" do
     visit root_path
     click_on "Projects"
     click_on "Amazeo 1.1"
-    click_on "Destroy"
+    click_on "Delete"
     expect(page).to have_content("Project was successfully destroyed.")
     expect(page).to have_no_content("Amazeo 1.1")
   end
