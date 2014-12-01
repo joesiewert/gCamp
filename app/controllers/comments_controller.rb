@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to project_task_path(@project, @task)
     else
-      render "tasks/show"
+      redirect_to project_task_path(@project, @task)
     end
   end
 
