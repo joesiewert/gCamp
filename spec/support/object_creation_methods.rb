@@ -32,6 +32,14 @@ module ObjectCreationMethods
     )
   end
 
+  def create_comment(task, user)
+    Comment.create!(
+      message: Faker::Lorem.sentence(5),
+      task: task,
+      user: user
+    )
+  end
+
   def signin(user)
     visit signin_path
     fill_in "Email", with: user.email

@@ -75,16 +75,35 @@ feature "Projects" do
     expect(page).to have_content("Amazeo 1.1")
   end
 
-  scenario "User deletes a project" do
-    Project.create!(
+  scenario "User deletes a project and associated memberships, tasks and comments" do
+    project = Project.create!(
       name: "Amazeo 1.1"
     )
+
+    2.times do
+      user = create_user
+      create_membership(project, user)
+    end
+
+    3.times do
+      task = create_task(project)
+      1.times do
+        create_comment(task, User.first)
+      end
+    end
 
     visit root_path
     click_on "Projects"
     click_on "Amazeo 1.1"
+    expect(page).to have_content("2 Members")
+    expect(page).to have_content("3 Tasks")
+    expect(Comment.all.count).to eq(3)
     click_on "Delete"
     expect(page).to have_content("Project was successfully destroyed.")
     expect(page).to have_no_content("Amazeo 1.1")
+    expect(Membership.all.count).to eq(0)
+    expect(Task.all.count).to eq(0)
+    expect(Comment.all.count).to eq(0)
   end
+
 end

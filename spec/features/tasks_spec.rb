@@ -142,13 +142,18 @@ feature "Tasks" do
     expect(page).to have_content("False")
   end
 
-  scenario "User deletes a task" do
-    Task.create!(
+  scenario "User deletes a task and associated comments" do
+    task = Task.create!(
       description: "Task 1",
       due_date: @test_date,
       project_id: @project.id,
       complete: false
     )
+    user = create_user
+
+    5.times do
+      create_comment(task, user)
+    end
 
     visit root_path
     click_on "Projects"
@@ -157,6 +162,9 @@ feature "Tasks" do
     expect(page).to have_content("Task 1")
     expect(page).to have_content("False")
     expect(page).to have_content(@test_date_expect)
+    within(".badge") do
+      expect(page).to have_content("5")
+    end
     find('.glyphicon').click
     expect(page).to have_content("Task was successfully destroyed.")
     click_on "All"
@@ -167,5 +175,7 @@ feature "Tasks" do
       click_on "gCamp 1.1"
     end
     expect(page).to have_content("0 Tasks")
+    expect(Comment.all.count).to eq(0)
   end
+
 end
