@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :ensure_current_user
 
   def index
     @projects = Project.all
@@ -41,7 +42,8 @@ class ProjectsController < ApplicationController
   end
 
   private
-  def project_params
-    params.require(:project).permit(:name)
-  end
+
+    def project_params
+      params.require(:project).permit(:name)
+    end
 end

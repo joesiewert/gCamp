@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_project
-  before_action :set_task
+  before_action :ensure_current_user, :set_project, :set_task
 
   def create
     @comment = Comment.new(comment_params)
@@ -16,16 +15,15 @@ class CommentsController < ApplicationController
 
   private
 
-  def set_task
-    @task = @project.tasks.find(params[:task_id])
-  end
+    def set_task
+      @task = @project.tasks.find(params[:task_id])
+    end
 
-  def set_project
-    @project = Project.find(params[:project_id])
-  end
+    def set_project
+      @project = Project.find(params[:project_id])
+    end
 
-  def comment_params
-    params.require(:comment).permit(:message)
-  end
-
+    def comment_params
+      params.require(:comment).permit(:message)
+    end
 end

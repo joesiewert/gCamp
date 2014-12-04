@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_action :set_project
+  before_action :ensure_current_user, :set_project
 
   def index
     @membership = Membership.new

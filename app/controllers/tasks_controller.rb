@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_project
+  before_action :ensure_current_user, :set_project
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
