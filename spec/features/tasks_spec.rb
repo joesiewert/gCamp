@@ -9,6 +9,8 @@ feature "Tasks" do
     @project = Project.create!(
       name: "gCamp 1.1"
     )
+    user = create_user
+    signin(user)
   end
 
   scenario "User creates a task" do
@@ -45,7 +47,7 @@ feature "Tasks" do
     expect(page).to have_content("New task")
     expect(page).to have_content("Description can't be blank")
     expect(page).to have_content("Due date can't be before today")
-    click_on "Projects"
+    click_on "gCamp"
     click_on "gCamp 1.1"
     expect(page).to have_content "0 Tasks"
   end
@@ -133,7 +135,7 @@ feature "Tasks" do
     click_on "Update Task"
     expect(page).to have_content("Edit task")
     expect(page).to have_content("Description can't be blank")
-    click_on "Projects"
+    click_on "gCamp"
     click_on "gCamp 1.1"
     click_on "1 Task"
     click_on "All"

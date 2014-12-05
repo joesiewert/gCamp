@@ -12,6 +12,8 @@ feature "Sign In" do
 
     visit root_path
     expect(page).to have_content("Sign Up")
+    expect(page).to have_link("gCamp", href: "/")
+    expect(page).to have_no_content("My Projects")
     click_on "Sign In"
   end
 
@@ -21,6 +23,8 @@ feature "Sign In" do
     click_button "Sign In"
     expect(page).to have_content("Joe User")
     expect(page).to have_content("Sign Out")
+    expect(page).to have_link("gCamp", href: "/projects")
+    expect(page).to have_content("My Projects")
   end
 
   scenario "Sign in with no email, no password" do
@@ -46,4 +50,5 @@ feature "Sign In" do
     click_button "Sign In"
     expect(page).to have_content("Username / password combination is invalid")
   end
+
 end

@@ -5,6 +5,7 @@ feature "Memberships" do
   scenario "Add a membership" do
     project = create_project
     user = create_user
+    signin(user)
 
     visit root_path
     click_on "Projects"
@@ -15,7 +16,7 @@ feature "Memberships" do
     click_on "Add New Member"
     expect(page).to have_content("#{user.full_name} was added successfully.")
     within(".table") do
-      expect(page).to have_selector(:link_or_button, user.full_name)
+      expect(page).to have_link(user.full_name)
       expect(page).to have_content("Member")
     end
     find(".breadcrumb").click_on(project.name)
@@ -26,17 +27,18 @@ feature "Memberships" do
     project = create_project
     user = create_user
     membership = create_membership(project, user)
+    signin(user)
 
     visit project_memberships_path(project)
     within(".table") do
-      expect(page).to have_selector(:link_or_button, user.full_name)
+      expect(page).to have_link(user.full_name)
       expect(page).to have_content(membership.role)
       select "Owner", from: "membership_role"
       click_on "Update"
     end
     expect(page).to have_content("#{user.full_name} was updated successfully.")
     within(".table") do
-      expect(page).to have_selector(:link_or_button, user.full_name)
+      expect(page).to have_link(user.full_name)
       expect(page).to have_content("Owner")
     end
     visit project_path(project)
@@ -47,16 +49,17 @@ feature "Memberships" do
     project = create_project
     user = create_user
     membership = create_membership(project, user)
+    signin(user)
 
     visit project_memberships_path(project)
     within(".table") do
-      expect(page).to have_selector(:link_or_button, user.full_name)
+      expect(page).to have_link(user.full_name)
       expect(page).to have_content(membership.role)
       find(".glyphicon").click
     end
     expect(page).to have_content("#{user.full_name} was removed successfully.")
     within(".table") do
-      expect(page).to have_no_selector(:link_or_button, user.full_name)
+      expect(page).to have_no_link(user.full_name)
       expect(page).to have_no_content(membership.role)
     end
     visit project_path(project)
@@ -65,6 +68,8 @@ feature "Memberships" do
 
   scenario "Must select a user" do
     project = create_project
+    user = create_user
+    signin(user)
 
     visit project_memberships_path(project)
     click_on "Add New Member"
@@ -77,10 +82,11 @@ feature "Memberships" do
     project = create_project
     user = create_user
     membership = create_membership(project, user)
+    signin(user)
 
     visit project_memberships_path(project)
     within(".table") do
-      expect(page).to have_selector(:link_or_button, user.full_name)
+      expect(page).to have_link(user.full_name)
       expect(page).to have_content(membership.role)
     end
     within(".well") do
