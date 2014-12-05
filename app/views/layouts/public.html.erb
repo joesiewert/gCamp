@@ -17,7 +17,11 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <%= link_to "gCamp", projects_path, class: "navbar-brand" %>
+          <% if current_user %>
+            <%= link_to "gCamp", projects_path, class: "navbar-brand" %>
+          <% else %>
+            <%= link_to "gCamp", root_path, class: "navbar-brand" %>
+          <% end %>
         </div>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
@@ -39,11 +43,28 @@
       <% end %>
       <%= yield %>
       <hr>
-      <footer class="text-center">
+      <footer>
         <%= link_to_unless_current "Home", root_path %> |
         <%= link_to_unless_current "About", about_path %> |
         <%= link_to_unless_current "Terms", terms_path %> |
         <%= link_to_unless_current "FAQ", faq_path %>
+        <% if current_user %>
+          | <%= link_to_unless_current "My Projects", projects_path %>
+        <% end %>
+        <div class="pull-right">
+          <%= link_to "https://www.linkedin.com/in/joesiewert" do %>
+            <%= image_tag "linked_in.png", width: "20em" %>
+          <% end %>
+          <%= link_to "https://github.com/joesiewert" do %>
+            <%= image_tag "github.png", width: "20em" %>
+          <% end %>
+          <%= link_to "https://twitter.com/joesiewert" do %>
+            <%= image_tag "twitter.png", width: "20em" %>
+          <% end %>
+          <%= link_to "http://www.galvanize.it/school#main" do %>
+            <%= image_tag "gschool.png", width: "55em" %>
+          <% end %>
+        </div>
       </footer>
     </div>
   </body>

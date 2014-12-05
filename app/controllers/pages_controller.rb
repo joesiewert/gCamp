@@ -1,7 +1,6 @@
-class PagesController < ApplicationController
+class PagesController < PublicController
 
   def index
-
     quote1 = Quote.new
     quote1.text = "Work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do."
     quote1.author = "-Steve Jobs"
@@ -18,7 +17,6 @@ class PagesController < ApplicationController
   end
 
   def faq
-
     faq1 = Faq.new
     faq1.question = "What is gCamp?"
     faq1.answer = "gCamp is an awesome tool that is going to change your life. gCamp is your one stop shop to organize all your tasks and documents. You'll also be able to track comments that you and others make. gCamp may eventually replace all need for paper and pens for the entire world. Well, maybe not, but it's going to be pretty cool."
@@ -32,7 +30,5 @@ class PagesController < ApplicationController
     faq3.answer = "gCamp is a work in progress. That said, it should be fully functional by March 2015. Functional, but our developers will continue to improve the site for the foreseeable future. Check in daily for new features and awesome functionality. It's going to blow your mind."
 
     @faqs = [faq1, faq2, faq3]
-
   end
-
 end
