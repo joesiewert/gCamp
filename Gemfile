@@ -9,6 +9,7 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov'
+  gem 'pry-rails'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
