@@ -11,7 +11,7 @@ feature "Comments" do
 
     visit root_path
     click_on "Projects"
-    click_on project.name
+    find(".table").click_on(project.name)
     click_on "1 Task"
     within(".badge") do
       expect(page).to have_content("0")

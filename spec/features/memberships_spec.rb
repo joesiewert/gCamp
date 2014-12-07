@@ -9,7 +9,7 @@ feature "Memberships" do
 
     visit root_path
     click_on "Projects"
-    click_on project.name
+    find(".table").click_on(project.name)
     click_on "0 Members"
     select user.full_name, from: "membership_user_id"
     select "Member", from: "membership_role"

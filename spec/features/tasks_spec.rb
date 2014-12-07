@@ -16,7 +16,7 @@ feature "Tasks" do
   scenario "User creates a task" do
     visit root_path
     click_on "Projects"
-    click_on "gCamp 1.1"
+    find(".table").click_on("gCamp 1.1")
     click_on "0 Tasks"
     expect(page).to have_no_content("Task 1")
     click_on "Create Task"
@@ -39,7 +39,7 @@ feature "Tasks" do
   scenario "User creates a task without a description and date in past" do
     visit root_path
     click_on "Projects"
-    click_on "gCamp 1.1"
+    find(".table").click_on("gCamp 1.1")
     click_on "0 Tasks"
     click_on "Create Task"
     fill_in "Due date", with: "01/11/2014"
@@ -48,7 +48,7 @@ feature "Tasks" do
     expect(page).to have_content("Description can't be blank")
     expect(page).to have_content("Due date can't be before today")
     click_on "gCamp"
-    click_on "gCamp 1.1"
+    find(".table").click_on("gCamp 1.1")
     expect(page).to have_content "0 Tasks"
   end
 
@@ -62,7 +62,7 @@ feature "Tasks" do
 
     visit root_path
     click_on "Projects"
-    click_on "gCamp 1.1"
+    find(".table").click_on("gCamp 1.1")
     click_on "1 Task"
     click_on "All"
     expect(page).to have_content("Task 1")
@@ -84,7 +84,7 @@ feature "Tasks" do
 
     visit root_path
     click_on "Projects"
-    click_on "gCamp 1.1"
+    find(".table").click_on("gCamp 1.1")
     click_on "1 Task"
     click_on "All"
     expect(page).to have_content("Task 1")
@@ -124,7 +124,7 @@ feature "Tasks" do
 
     visit root_path
     click_on "Projects"
-    click_on "gCamp 1.1"
+    find(".table").click_on("gCamp 1.1")
     click_on "1 Task"
     click_on "All"
     expect(page).to have_content("Task 1")
@@ -136,7 +136,7 @@ feature "Tasks" do
     expect(page).to have_content("Edit task")
     expect(page).to have_content("Description can't be blank")
     click_on "gCamp"
-    click_on "gCamp 1.1"
+    find(".table").click_on("gCamp 1.1")
     click_on "1 Task"
     click_on "All"
     expect(page).to have_content("Task 1")
@@ -159,7 +159,7 @@ feature "Tasks" do
 
     visit root_path
     click_on "Projects"
-    click_on "gCamp 1.1"
+    find(".table").click_on("gCamp 1.1")
     click_on "1 Task"
     expect(page).to have_content("Task 1")
     expect(page).to have_content("False")

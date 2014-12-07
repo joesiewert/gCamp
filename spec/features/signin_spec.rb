@@ -24,7 +24,11 @@ feature "Sign In" do
     expect(page).to have_content("Joe User")
     expect(page).to have_content("Sign Out")
     expect(page).to have_link("gCamp", href: "/projects")
-    expect(page).to have_content("My Projects")
+    click_on "My Projects"
+    expect(page).to have_link("gCamp", href: "/projects")
+    within(".dropdown-toggle") do
+      expect(page).to have_content("My Projects")
+    end
   end
 
   scenario "Sign in with no email, no password" do

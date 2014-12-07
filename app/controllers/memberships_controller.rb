@@ -1,5 +1,6 @@
 class MembershipsController < ApplicationController
   before_action :ensure_current_user, :set_project
+  before_action :set_projects, only: [:index, :create]
 
   def index
     @membership = Membership.new
