@@ -22,8 +22,11 @@ feature "Sign Up" do
     fill_in "Password", with: "1234$!"
     fill_in "Password confirmation", with: "1234$!"
     click_button "Sign Up"
-    expect(page).to have_content("Joe Test")
-    expect(page).to have_content("Sign Out")
+    within(".navbar-right") do
+      expect(page).to have_content("Joe Test")
+      expect(page).to have_content("Sign Out")
+    end
+    expect(page).to have_content("Create project")
   end
 
   scenario "Sign up with no email, no password" do

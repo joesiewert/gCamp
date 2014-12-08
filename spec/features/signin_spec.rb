@@ -21,10 +21,10 @@ feature "Sign In" do
     fill_in "Email", with: "joe@user.com"
     fill_in "Password", with: "1234$!"
     click_button "Sign In"
-    expect(page).to have_content("Joe User")
-    expect(page).to have_content("Sign Out")
-    expect(page).to have_link("gCamp", href: "/projects")
-    click_on "My Projects"
+    within(".navbar-right") do
+      expect(page).to have_content("Joe User")
+      expect(page).to have_content("Sign Out")
+    end
     expect(page).to have_link("gCamp", href: "/projects")
     within(".dropdown-toggle") do
       expect(page).to have_content("My Projects")
