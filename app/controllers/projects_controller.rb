@@ -20,8 +20,17 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @membership = Membership.new
+    @membership.user = current_user
+    @membership.role = "Owner"
+
     if @project.save
-      redirect_to project_path(@project), notice: 'Project was successfully created.'
+      @membership.project = @project
+      if @membership.save
+        redirect_to project_path(@project), notice: 'Project was successfully created.'
+      else
+        render :new
+      end
     else
       render :new
     end

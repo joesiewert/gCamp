@@ -14,6 +14,11 @@ feature "Projects" do
     click_on "Create Project"
     expect(page).to have_content("Project was successfully created.")
     expect(page).to have_content("Amazeo 1.1")
+    click_on "1 Member"
+    within(".table") do
+      expect(page).to have_link(user.full_name)
+      expect(page).to have_content("Owner")
+    end
     within(".breadcrumb") do
       click_on "Projects"
     end
