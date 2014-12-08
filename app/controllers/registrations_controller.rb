@@ -8,7 +8,7 @@ class RegistrationsController < PublicController
     @user = User.new(params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation))
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to new_project_path
     else
       @sign_up_errors = @user.errors.full_messages
       render :new
