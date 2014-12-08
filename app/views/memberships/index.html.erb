@@ -17,19 +17,19 @@
 <div class="row">
   <div class="col-sm-6">
     <div class="well">
-    <div class="form-inline">
-      <%= form_for [@project, @membership] do |f| %>
-        <div class="form-group">
-          <%= f.collection_select(:user_id, User.order(:first_name), :id, :full_name, {include_blank: "Please select a user"}, {class: "form-control"}) %>
-        </div>
-        <div class="form-group">
-          <%= f.select(:role, ["Member", "Owner"], {}, {class: "form-control"}) %>
-        </div>
-        <%= f.submit "Add New Member", class: "btn btn-primary" %>
-      <% end %>
+      <div class="form-inline">
+        <%= form_for [@project, @membership] do |f| %>
+          <div class="form-group">
+            <%= f.collection_select(:user_id, User.order(:first_name), :id, :full_name, {include_blank: "Please select a user"}, {class: "form-control"}) %>
+          </div>
+          <div class="form-group">
+            <%= f.select(:role, ["Member", "Owner"], {}, {class: "form-control"}) %>
+          </div>
+          <%= f.submit "Add New Member", class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 </div>
 
 <table class="table">
