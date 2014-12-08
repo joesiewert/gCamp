@@ -7,11 +7,11 @@
     <p>Get organized and increase productivity with your team.</p>
     <p>gCamp is extremely active. Check out our stats below!</p>
     <p>
-      <%= pluralize(Project.all.count, 'project') %>,
-      <%= pluralize(Task.all.count, 'task') %>,
-      <%= pluralize(Membership.all.count, 'project member') %>,
-      <%= pluralize(User.all.count, 'user') %> and
-      <%= pluralize(Comment.all.count, 'comment') %>.
+      <%= pluralize(Project.count, 'project') %>,
+      <%= pluralize(Task.count, 'task') %>,
+      <%= pluralize(Membership.count, 'project member') %>,
+      <%= pluralize(User.count, 'user') %> and
+      <%= pluralize(Comment.count, 'comment') %>.
     </p>
   </div>
 </div>
