@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   has_secure_password
 
+  has_many :memberships, dependent: :destroy
+  has_many :comments
+
   before_validation do |user|
     user.email = user.email.downcase.strip
   end

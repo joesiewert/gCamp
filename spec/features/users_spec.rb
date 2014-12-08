@@ -125,4 +125,33 @@ feature "Users" do
     expect(User.count).to eq(0)
   end
 
+  scenario "User deletes a user with existing membership and comments" do
+    user1 = create_user
+    project = create_project
+    membership = create_membership(project, user1)
+    task = create_task(project)
+
+    3.times do
+      create_comment(task, user1)
+    end
+
+    signin(user1)
+    expect(User.count).to eq(1)
+    expect(Membership.count).to eq(1)
+    expect(Comment.count).to eq(3)
+    visit users_path
+    click_on "Edit"
+    click_on "Delete User"
+    expect(User.count).to eq(0)
+    expect(Membership.count).to eq(0)
+    user2 = create_user
+    signin(user2)
+    visit project_tasks_path(project)
+    within(".badge") do
+      expect(page).to have_content("3")
+    end
+    click_on task.description
+    expect(page).to have_content("Deleted User")
+  end
+
 end
