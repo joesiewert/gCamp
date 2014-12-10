@@ -10,6 +10,7 @@ feature "Tasks" do
       name: "gCamp 1.1"
     )
     user = create_user
+    create_membership(@project, user)
     signin(user)
   end
 

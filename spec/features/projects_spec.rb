@@ -41,10 +41,11 @@ feature "Projects" do
   end
 
   scenario "User views a project" do
-    Project.create!(
+    project = Project.create!(
       name: "Amazeo 1.1"
     )
     user = create_user
+    create_membership(project, user)
     signin(user)
 
     visit root_path
@@ -53,11 +54,23 @@ feature "Projects" do
     expect(page).to have_content("Amazeo 1.1")
   end
 
+  scenario "User can only see projects he is a member of" do
+    user = create_user
+    project1 = create_project
+    project2 = create_project
+    membership = create_membership(project1, user)
+    signin(user)
+    visit projects_path
+    expect(page).to have_content(project1.name)
+    expect(page).to have_no_content(project2.name)
+  end
+
   scenario "User edits a project" do
-    Project.create!(
+    project = Project.create!(
       name: "Amazeo 1.1"
     )
     user = create_user
+    create_membership(project, user)
     signin(user)
 
     visit root_path
@@ -77,10 +90,11 @@ feature "Projects" do
   end
 
   scenario "User edits a project to have no name" do
-    Project.create!(
+    project = Project.create!(
       name: "Amazeo 1.1"
     )
     user = create_user
+    create_membership(project, user)
     signin(user)
 
     visit root_path
@@ -99,26 +113,21 @@ feature "Projects" do
     project = Project.create!(
       name: "Amazeo 1.1"
     )
-
-    2.times do
-      user = create_user
-      create_membership(project, user)
-    end
+    user = create_user
+    create_membership(project, user)
 
     3.times do
       task = create_task(project)
       1.times do
-        create_comment(task, User.first)
+        create_comment(task, user)
       end
     end
-
-    user = create_user
     signin(user)
 
     visit root_path
     click_on "My Projects"
     find(".table").click_on("Amazeo 1.1")
-    expect(page).to have_content("2 Members")
+    expect(page).to have_content("1 Member")
     expect(page).to have_content("3 Tasks")
     expect(Comment.count).to eq(3)
     click_on "Delete"

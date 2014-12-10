@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
     end
 
     def set_projects
-      @projects = Project.all
+      current_user_projects = current_user.memberships.pluck(:project_id)
+      @projects = Project.where(id: current_user_projects)
     end
 
     def ensure_current_user
@@ -20,4 +21,13 @@ class ApplicationController < ActionController::Base
         redirect_to signin_path, notice: 'You must be logged in to access that action.'
       end
     end
+
+    class AccessDenied < StandardError
+    end
+
+    def render_404
+      render 'public/404.html', status: 404, layout: false
+    end
+
+    rescue_from AccessDenied, with: :render_404
 end

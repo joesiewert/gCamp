@@ -6,6 +6,7 @@ feature "Comments" do
     project = create_project
     user = create_user
     task = create_task(project)
+    create_membership(project, user)
     comment = Faker::Lorem.sentence(5)
     signin(user)
 

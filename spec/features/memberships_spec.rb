@@ -4,23 +4,27 @@ feature "Memberships" do
 
   scenario "Add a membership" do
     project = create_project
-    user = create_user
-    signin(user)
+    user1 = create_user
+    user2 = create_user
+    create_membership(project, user1)
+    signin(user1)
 
     visit root_path
     click_on "Projects"
     find(".table").click_on(project.name)
-    click_on "0 Members"
-    select user.full_name, from: "membership_user_id"
-    select "Member", from: "membership_role"
+    click_on "1 Member"
+    within(".well") do
+      select user2.full_name, from: "membership_user_id"
+      select "Member", from: "membership_role"
+    end
     click_on "Add New Member"
-    expect(page).to have_content("#{user.full_name} was added successfully.")
+    expect(page).to have_content("#{user2.full_name} was added successfully.")
     within(".table") do
-      expect(page).to have_link(user.full_name)
+      expect(page).to have_link(user2.full_name)
       expect(page).to have_content("Member")
     end
     find(".breadcrumb").click_on(project.name)
-    expect(page).to have_content("1 Member")
+    expect(page).to have_content("2 Members")
   end
 
   scenario "Update a membership" do
