@@ -61,25 +61,21 @@ feature "Memberships" do
       expect(page).to have_content(membership.role)
       find(".glyphicon").click
     end
-    expect(page).to have_content("#{user.full_name} was removed successfully.")
-    within(".table") do
-      expect(page).to have_no_link(user.full_name)
-      expect(page).to have_no_content(membership.role)
-    end
-    visit project_path(project)
-    expect(page).to have_content("0 Members")
+    #expect(page).to have_content("#{user.full_name} was removed successfully.")
+    expect(Membership.count).to eq(0)
   end
 
   scenario "Must select a user" do
     project = create_project
     user = create_user
+    create_membership(project, user)
     signin(user)
 
     visit project_memberships_path(project)
     click_on "Add New Member"
     expect(page).to have_content("User can't be blank")
     visit project_path(project)
-    expect(page).to have_content("0 Members")
+    expect(page).to have_content("1 Member")
   end
 
   scenario "Can't add a duplicate user" do
