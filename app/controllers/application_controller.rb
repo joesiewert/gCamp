@@ -22,6 +22,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def check_membership
+      unless current_user.memberships.where(project_id: @project.id).present?
+        raise AccessDenied
+      end
+    end
+
     class AccessDenied < StandardError
     end
 

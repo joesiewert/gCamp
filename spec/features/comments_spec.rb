@@ -32,8 +32,9 @@ feature "Comments" do
 
   scenario "Add a comment with no message" do
     project = create_project
-    task = create_task(project)
     user = create_user
+    task = create_task(project)
+    create_membership(project, user)
     signin(user)
 
     visit project_tasks_path(project)

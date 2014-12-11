@@ -128,7 +128,7 @@ feature "Users" do
   scenario "User deletes a user with existing membership and comments" do
     user1 = create_user
     project = create_project
-    membership = create_membership(project, user1)
+    create_membership(project, user1)
     task = create_task(project)
 
     3.times do
@@ -145,6 +145,7 @@ feature "Users" do
     expect(User.count).to eq(0)
     expect(Membership.count).to eq(0)
     user2 = create_user
+    create_membership(project, user2)
     signin(user2)
     visit project_tasks_path(project)
     within(".badge") do

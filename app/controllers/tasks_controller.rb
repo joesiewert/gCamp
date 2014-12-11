@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
-  before_action :ensure_current_user, :set_project
+  before_action :ensure_current_user
+  before_action :set_project
+  before_action :check_membership
   before_action :set_projects, except: [:destroy]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
