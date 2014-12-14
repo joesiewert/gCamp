@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :ensure_current_user, :set_project, :set_task
+  before_action :set_project, :set_task
 
   def create
     @comment = Comment.new(comment_params)

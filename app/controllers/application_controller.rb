@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :current_user
+  before_action :ensure_signed_in
 
   private
     def current_user
@@ -16,9 +17,9 @@ class ApplicationController < ActionController::Base
       @projects = Project.where(id: current_user_projects)
     end
 
-    def ensure_current_user
+    def ensure_signed_in
       unless current_user
-        redirect_to signin_path, notice: 'You must be logged in to access that action.'
+        redirect_to signin_path, notice: 'You must be signed in to access that action.'
       end
     end
 

@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-  before_action :ensure_current_user
   before_action :set_projects, except: [:destroy]
 
   def index

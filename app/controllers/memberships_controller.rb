@@ -1,5 +1,4 @@
 class MembershipsController < ApplicationController
-  before_action :ensure_current_user
   before_action :set_project
   before_action :check_membership, only: [:index]
   before_action :set_projects, only: [:index, :create]
