@@ -70,7 +70,7 @@ feature "Projects" do
       name: "Amazeo 1.1"
     )
     user = create_user
-    create_membership(project, user)
+    create_membership(project, user, role: "Owner")
     signin(user)
 
     visit root_path
@@ -94,7 +94,7 @@ feature "Projects" do
       name: "Amazeo 1.1"
     )
     user = create_user
-    create_membership(project, user)
+    create_membership(project, user, role: "Owner")
     signin(user)
 
     visit root_path

@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
     self.memberships.where(project_id: project.id).present?
   end
 
+  def project_owner?(project)
+    self.memberships.where(project_id: project.id, role: "Owner").present?
+  end
+
 end

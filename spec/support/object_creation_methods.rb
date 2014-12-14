@@ -24,11 +24,12 @@ module ObjectCreationMethods
     )
   end
 
-  def create_membership(project, user)
-    Membership.create!(
+  def create_membership(project, user, overrides = {})
+    Membership.create!({
       role: "Member",
       project: project,
       user: user
+    }.merge(overrides)
     )
   end
 

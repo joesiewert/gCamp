@@ -16,6 +16,9 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    unless current_user.project_owner?(@project)
+      raise AccessDenied
+    end
   end
 
   def create

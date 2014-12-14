@@ -34,4 +34,46 @@ describe ProjectsController do
     end
   end
 
+  describe '#edit' do
+    it 'renders the application template' do
+      project = create_project
+      user = create_user
+      membership = create_membership(project, user, role: "Owner")
+      session[:user_id] = user.id
+      get :edit, id: project.id
+      expect(response).to render_template('application')
+    end
+
+    it 'redirects public users to signin' do
+      project = create_project
+      get :edit, id: project.id
+      expect(response).to redirect_to(signin_path)
+    end
+
+    it 'is visible to project owner' do
+      project = create_project
+      user = create_user
+      membership = create_membership(project, user, role: "Owner")
+      session[:user_id] = user.id
+      get :edit, id: project.id
+      expect(response.status).to eq(200)
+    end
+
+    it 'is not visible to project member' do
+      project = create_project
+      user = create_user
+      membership = create_membership(project, user)
+      session[:user_id] = user.id
+      get :edit, id: project.id
+      expect(response.status).to eq(404)
+    end
+
+    it 'is not visible to non-project member' do
+      project = create_project
+      user = create_user
+      session[:user_id] = user.id
+      get :edit, id: project.id
+      expect(response.status).to eq(404)
+    end
+  end
 end
