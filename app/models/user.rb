@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def project_member?(project)
+    self.memberships.where(project_id: project.id).present?
+  end
+
 end

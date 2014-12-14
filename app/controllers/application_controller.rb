@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :current_user, :set_projects
+  helper_method :current_user
 
   private
     def current_user
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     end
 
     def check_membership
-      unless current_user.memberships.where(project_id: @project.id).present?
+      unless current_user.project_member?(@project)
         raise AccessDenied
       end
     end
