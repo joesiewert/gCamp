@@ -6,7 +6,7 @@ feature "Memberships" do
     project = create_project
     user1 = create_user
     user2 = create_user
-    create_membership(project, user1)
+    create_membership(project, user1, role: "Owner")
     signin(user1)
 
     visit root_path
@@ -27,10 +27,23 @@ feature "Memberships" do
     expect(page).to have_content("2 Members")
   end
 
-  scenario "Update a membership" do
+  scenario "View memberships as project member" do
     project = create_project
     user = create_user
     membership = create_membership(project, user)
+    signin(user)
+
+    visit project_memberships_path(project)
+    expect(page).to have_no_content("Add New Member")
+    expect(page).to have_link(user.full_name)
+    expect(page).to have_content("Member")
+    expect(page).to have_no_content("Update")
+  end
+
+  scenario "Update a membership" do
+    project = create_project
+    user = create_user
+    membership = create_membership(project, user, role: "Owner")
     signin(user)
 
     visit project_memberships_path(project)
@@ -52,7 +65,7 @@ feature "Memberships" do
   scenario "Remove a membership" do
     project = create_project
     user = create_user
-    membership = create_membership(project, user)
+    membership = create_membership(project, user, role: "Owner")
     signin(user)
 
     visit project_memberships_path(project)
@@ -68,7 +81,7 @@ feature "Memberships" do
   scenario "Must select a user" do
     project = create_project
     user = create_user
-    create_membership(project, user)
+    create_membership(project, user, role: "Owner")
     signin(user)
 
     visit project_memberships_path(project)
@@ -81,7 +94,7 @@ feature "Memberships" do
   scenario "Can't add a duplicate user" do
     project = create_project
     user = create_user
-    membership = create_membership(project, user)
+    membership = create_membership(project, user, role: "Owner")
     signin(user)
 
     visit project_memberships_path(project)

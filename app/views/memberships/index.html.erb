@@ -8,39 +8,8 @@
   <li class="active">Memberships</li>
 </ol>
 
-<div class="row">
-  <div class="col-sm-6">
-    <%= render "shared/errors", record: @membership %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6">
-    <div class="well">
-      <div class="form-inline">
-        <%= form_for [@project, @membership] do |f| %>
-          <div class="form-group">
-            <%= f.collection_select(:user_id, User.order(:first_name), :id, :full_name, {include_blank: "Please select a user"}, {class: "form-control"}) %>
-          </div>
-          <div class="form-group">
-            <%= f.select(:role, ["Member", "Owner"], {}, {class: "form-control"}) %>
-          </div>
-          <%= f.submit "Add New Member", class: "btn btn-primary" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<table class="table">
-  <% @project.memberships.each do |membership| %>
-    <%= form_for [@project, membership] do |f| %>
-      <tr>
-        <td class="col-sm-2"><%= link_to membership.user.full_name, user_path(membership.user) %></td>
-        <td class="col-sm-2"><%= f.select(:role, ["Member", "Owner"], {}, {class: "form-control"}) %></td>
-        <td class="col-sm-1"><%= f.submit "Update", class: "btn btn-primary" %></td>
-        <td><%= link_to "", project_membership_path(@project, membership), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %></td>
-      </tr>
-    <% end %>
-  <% end %>
-</table>
+<% if current_user.project_owner?(@project) %>
+  <%= render 'form' %>
+<% else %>
+  <%= render 'readonly' %>
+<% end %>

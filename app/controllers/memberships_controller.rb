@@ -1,8 +1,9 @@
 class MembershipsController < ApplicationController
   before_action :ensure_current_user
   before_action :set_project
-  before_action :check_membership
+  before_action :check_membership, only: [:index]
   before_action :set_projects, only: [:index, :create]
+  before_action :check_ownership, only: [:create, :update, :destroy]
 
   def index
     @membership = Membership.new

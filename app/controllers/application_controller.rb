@@ -28,6 +28,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def check_ownership
+      unless current_user.project_owner?(@project)
+        raise AccessDenied
+      end
+    end
+
     class AccessDenied < StandardError
     end
 
