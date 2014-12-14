@@ -11,6 +11,9 @@
     </div>
     <div class="col-md-2">
       <%= membership.role %>
+      <% if current_user == membership.user %>
+        <%= link_to "", project_membership_path(@project, membership), method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-remove" %>
+      <% end %>
     </div>
     <br><br>
   </div>

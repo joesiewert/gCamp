@@ -190,11 +190,22 @@ describe MembershipsController do
       expect(response.status).to eq(302)
     end
 
-    it 'does not delete a membership as project member' do
+    it 'allows project member to delete his own membership' do
       project = create_project
       user = create_user
       membership = create_membership(project, user)
       session[:user_id] = user.id
+      delete :destroy, project_id: project.id, id: membership.id
+      expect(response.status).to eq(302)
+    end
+
+    it 'does not delete a membership as project member' do
+      project = create_project
+      user1 = create_user
+      user2 = create_user
+      create_membership(project, user1)
+      membership = create_membership(project, user2)
+      session[:user_id] = user1.id
       delete :destroy, project_id: project.id, id: membership.id
       expect(response.status).to eq(404)
     end
