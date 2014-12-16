@@ -1,5 +1,0 @@
-== README
-
-{<img src="https://travis-ci.org/joesiewert/gCamp.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/joesiewert/gCamp]
-
-Production: http://peaceful-ridge-1402.herokuapp.com
