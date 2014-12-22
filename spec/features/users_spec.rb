@@ -19,7 +19,6 @@ feature "Users" do
     click_on "Create User"
     expect(page).to have_content("User was successfully created.")
     expect(page).to have_content("Joe User")
-    expect(page).to have_content("joe@user.com")
   end
 
   scenario "User creates a user with invalid data" do
