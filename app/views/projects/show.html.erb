@@ -1,8 +1,10 @@
 <h1>
   <%= @project.name %>
-  <div class="pull-right">
-    <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-primary" %>
-  </div>
+  <% if current_user.project_owner?(@project) %>
+    <div class="pull-right">
+      <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </h1>
 
 <ol class="breadcrumb">
