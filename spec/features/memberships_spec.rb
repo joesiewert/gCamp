@@ -64,18 +64,20 @@ feature "Memberships" do
 
   scenario "Remove a membership" do
     project = create_project
-    user = create_user
-    membership = create_membership(project, user, role: "Owner")
-    signin(user)
+    user1 = create_user
+    user2 = create_user
+    create_membership(project, user1, role: "Owner")
+    membership = create_membership(project, user2)
+    signin(user1)
 
     visit project_memberships_path(project)
     within(".table") do
-      expect(page).to have_link(user.full_name)
+      expect(page).to have_link(user2.full_name)
       expect(page).to have_content(membership.role)
       find(".glyphicon").click
     end
     #expect(page).to have_content("#{user.full_name} was removed successfully.")
-    expect(Membership.count).to eq(0)
+    expect(Membership.count).to eq(1)
   end
 
   scenario "Must select a user" do
