@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_projects, except: [:destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -60,5 +61,11 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    end
+
+    def check_user
+      unless current_user == @user
+        raise AccessDenied
+      end
     end
 end

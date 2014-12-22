@@ -1,8 +1,10 @@
 <h1>
   <%= "#{@user.first_name} #{@user.last_name}" %>
-  <div class="pull-right">
-    <%= link_to "Edit", edit_user_path, class: "btn btn-primary" %>
-  </div>
+  <% if current_user == @user %>
+    <div class="pull-right">
+      <%= link_to "Edit", edit_user_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </h1>
 
 <dl class="dl-horizontal">
