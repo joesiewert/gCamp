@@ -40,13 +40,13 @@ Task.delete_all
 Comment.delete_all
 Membership.delete_all
 
-# admin = User.create!(
-#   first_name: 'Admin',
-#   last_name: 'User',
-#   email: 'admin@example.com',
-#   password: 'password'
-#   admin: true
-# )
+admin = User.create!(
+  first_name: 'Admin',
+  last_name: 'User',
+  email: 'admin@example.com',
+  password: 'password',
+  admin: true
+)
 
 owner = User.create!(
   first_name: 'Owner',
