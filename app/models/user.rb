@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
     self.memberships.where(project_id: project.id, role: "Owner").present?
   end
 
+  def admin?
+    self.admin
+  end
+
 end
