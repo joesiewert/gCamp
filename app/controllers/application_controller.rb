@@ -13,8 +13,12 @@ class ApplicationController < ActionController::Base
     end
 
     def set_projects
-      current_user_projects = current_user.memberships.pluck(:project_id)
-      @projects = Project.where(id: current_user_projects)
+      if current_user.admin?
+        @projects = Project.all
+      else
+        current_user_projects = current_user.memberships.pluck(:project_id)
+        @projects = Project.where(id: current_user_projects)
+      end
     end
 
     def ensure_signed_in
@@ -24,13 +28,13 @@ class ApplicationController < ActionController::Base
     end
 
     def check_membership
-      unless current_user.project_member?(@project)
+      unless current_user.project_member?(@project) || current_user.admin?
         raise AccessDenied
       end
     end
 
     def check_ownership
-      unless current_user.project_owner?(@project)
+      unless current_user.project_owner?(@project) || current_user.admin?
         raise AccessDenied
       end
     end

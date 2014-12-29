@@ -1,6 +1,6 @@
 <h1>
   <%= @project.name %>
-  <% if current_user.project_owner?(@project) %>
+  <% if current_user.project_owner?(@project) || current_user.admin? %>
     <div class="pull-right">
       <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-primary" %>
     </div>

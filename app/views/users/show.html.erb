@@ -1,6 +1,6 @@
 <h1>
   <%= "#{@user.first_name} #{@user.last_name}" %>
-  <% if current_user == @user %>
+  <% if current_user == @user || current_user.admin? %>
     <div class="pull-right">
       <%= link_to "Edit", edit_user_path, class: "btn btn-primary" %>
     </div>
@@ -14,7 +14,7 @@
   <dt>Last name:</dt>
   <dd><%= @user.last_name %></dd>
 
-  <% if current_user == @user %>
+  <% if current_user == @user || current_user.admin? %>
     <dt>Email:</dt>
     <dd><%= mail_to @user.email %></dd>
   <% end %>
