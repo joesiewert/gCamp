@@ -18,6 +18,23 @@ describe TasksController do
       expect(response).to redirect_to(signin_path)
     end
 
+    it 'is visible to project owner' do
+      project = create_project
+      user = create_user
+      create_membership(project, user, role: "Owner")
+      session[:user_id] = user.id
+      get :index, project_id: project.id
+      expect(response.status).to eq(200)
+    end
+
+    it 'is visible to admin' do
+      project = create_project
+      user = create_user(admin: true)
+      session[:user_id] = user.id
+      get :index, project_id: project.id
+      expect(response.status).to eq(200)
+    end
+
     it 'is visible to project member' do
       project = create_project
       user = create_user
@@ -50,6 +67,23 @@ describe TasksController do
       project = create_project
       get :new, project_id: project.id
       expect(response).to redirect_to(signin_path)
+    end
+
+    it 'is visible to project owner' do
+      project = create_project
+      user = create_user
+      create_membership(project, user, role: "Owner")
+      session[:user_id] = user.id
+      get :new, project_id: project.id
+      expect(response.status).to eq(200)
+    end
+
+    it 'is visible to admin' do
+      project = create_project
+      user = create_user(admin: true)
+      session[:user_id] = user.id
+      get :new, project_id: project.id
+      expect(response.status).to eq(200)
     end
 
     it 'is visible to project member' do
@@ -86,6 +120,25 @@ describe TasksController do
       task = create_task(project)
       get :show, project_id: project.id, id: task.id
       expect(response).to redirect_to(signin_path)
+    end
+
+    it 'is visible to project owner' do
+      project = create_project
+      user = create_user
+      task = create_task(project)
+      create_membership(project, user, role: "Owner")
+      session[:user_id] = user.id
+      get :show, project_id: project.id, id: task.id
+      expect(response.status).to eq(200)
+    end
+
+    it 'is visible to admin' do
+      project = create_project
+      user = create_user(admin: true)
+      task = create_task(project)
+      session[:user_id] = user.id
+      get :show, project_id: project.id, id: task.id
+      expect(response.status).to eq(200)
     end
 
     it 'is visible to project member' do
@@ -126,6 +179,25 @@ describe TasksController do
       expect(response).to redirect_to(signin_path)
     end
 
+    it 'is visible to project owner' do
+      project = create_project
+      user = create_user
+      task = create_task(project)
+      create_membership(project, user, role: "Owner")
+      session[:user_id] = user.id
+      get :edit, project_id: project.id, id: task.id
+      expect(response.status).to eq(200)
+    end
+
+    it 'is visible to admin' do
+      project = create_project
+      user = create_user(admin: true)
+      task = create_task(project)
+      session[:user_id] = user.id
+      get :edit, project_id: project.id, id: task.id
+      expect(response.status).to eq(200)
+    end
+
     it 'is visible to project member' do
       project = create_project
       user = create_user
@@ -159,6 +231,35 @@ describe TasksController do
       expect(response).to redirect_to(signin_path)
     end
 
+    it 'creates a task as project owner' do
+      project = create_project
+      user = create_user
+      create_membership(project, user, role: "Owner")
+      session[:user_id] = user.id
+      post :create,
+        project_id: project.id,
+        task: {
+          project: project,
+          description: Faker::Lorem.sentence(1),
+          due_date: Faker::Time.forward(14)
+        }
+      expect(response.status).to eq(302)
+    end
+
+    it 'creates a task as admin' do
+      project = create_project
+      user = create_user(admin: true)
+      session[:user_id] = user.id
+      post :create,
+        project_id: project.id,
+        task: {
+          project: project,
+          description: Faker::Lorem.sentence(1),
+          due_date: Faker::Time.forward(14)
+        }
+      expect(response.status).to eq(302)
+    end
+
     it 'creates a task as project member' do
       project = create_project
       user = create_user
@@ -172,7 +273,6 @@ describe TasksController do
           due_date: Faker::Time.forward(14)
         }
       expect(response.status).to eq(302)
-      expect(flash[:notice]).to match('Task was successfully created.')
     end
 
     it 'does not create a task as non-project member' do
@@ -205,6 +305,39 @@ describe TasksController do
       expect(response).to redirect_to(signin_path)
     end
 
+    it 'updates a task as project owner' do
+      project = create_project
+      user = create_user
+      task = create_task(project)
+      create_membership(project, user, role: "Owner")
+      session[:user_id] = user.id
+      put :update,
+        project_id: project.id,
+        id: task.id,
+        task: {
+          project: project,
+          description: Faker::Lorem.sentence(1),
+          due_date: Faker::Time.forward(14)
+        }
+      expect(response.status).to eq(302)
+    end
+
+    it 'updates a task as admin' do
+      project = create_project
+      user = create_user(admin: true)
+      task = create_task(project)
+      session[:user_id] = user.id
+      put :update,
+        project_id: project.id,
+        id: task.id,
+        task: {
+          project: project,
+          description: Faker::Lorem.sentence(1),
+          due_date: Faker::Time.forward(14)
+        }
+      expect(response.status).to eq(302)
+    end
+
     it 'updates a task as project member' do
       project = create_project
       user = create_user
@@ -220,7 +353,6 @@ describe TasksController do
           due_date: Faker::Time.forward(14)
         }
       expect(response.status).to eq(302)
-      expect(flash[:notice]).to match('Task was successfully updated.')
     end
 
     it 'does not update a task as non-project member' do
@@ -248,6 +380,25 @@ describe TasksController do
       expect(response).to redirect_to(signin_path)
     end
 
+    it 'deletes a task as project owner' do
+      project = create_project
+      user = create_user
+      task = create_task(project)
+      create_membership(project, user, role: "Owner")
+      session[:user_id] = user.id
+      delete :destroy, project_id: project.id, id: task.id
+      expect(response.status).to eq(302)
+    end
+
+    it 'deletes a task as admin' do
+      project = create_project
+      user = create_user(admin: true)
+      task = create_task(project)
+      session[:user_id] = user.id
+      delete :destroy, project_id: project.id, id: task.id
+      expect(response.status).to eq(302)
+    end
+
     it 'deletes a task as project member' do
       project = create_project
       user = create_user
@@ -256,7 +407,6 @@ describe TasksController do
       session[:user_id] = user.id
       delete :destroy, project_id: project.id, id: task.id
       expect(response.status).to eq(302)
-      expect(flash[:notice]).to match('Task was successfully destroyed.')
     end
 
     it 'does not delete a task as non-project member' do
