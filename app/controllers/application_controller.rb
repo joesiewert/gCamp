@@ -23,7 +23,14 @@ class ApplicationController < ActionController::Base
 
     def ensure_signed_in
       unless current_user
+        save_url
         redirect_to signin_path, notice: 'You must be signed in to access that action.'
+      end
+    end
+
+    def save_url
+      if request.get?
+        session[:saved_url] = request.url
       end
     end
 
