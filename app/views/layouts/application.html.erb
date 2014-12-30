@@ -34,6 +34,9 @@
             </ul>
           </li>
         </ul>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Users", users_path %></li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
             <li><%= link_to "#{current_user.full_name}", user_path(current_user) %></li>
