@@ -20,11 +20,13 @@
   <%= link_to pluralize(@project.memberships.count, 'Member'), project_memberships_path(@project) %>
 </p>
 
-<div class="col-md-12 well">
-  <p><strong>Delete Project</strong></p>
-  <p>
-    Deleting this project will also delete <%= pluralize(@project.memberships.count, 'membership') %>,
-    <%= pluralize(@project.tasks.count, 'task') %> and associated comments.
-  </p>
-  <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-</div>
+<% if current_user.project_owner?(@project) || current_user.admin? %>
+  <div class="col-md-12 well">
+    <p><strong>Delete Project</strong></p>
+    <p>
+      Deleting this project will also delete <%= pluralize(@project.memberships.count, 'membership') %>,
+      <%= pluralize(@project.tasks.count, 'task') %> and associated comments.
+    </p>
+    <%= link_to "Delete", project_path(@project), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+  </div>
+<% end %>

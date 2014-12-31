@@ -114,7 +114,7 @@ feature "Projects" do
       name: "Amazeo 1.1"
     )
     user = create_user
-    create_membership(project, user)
+    create_membership(project, user, role: "Owner")
 
     3.times do
       task = create_task(project)
