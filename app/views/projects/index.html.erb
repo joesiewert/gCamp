@@ -1,11 +1,6 @@
-<div class="page-header">
-  <h1>
-    Projects
-      <div class="pull-right">
-        <%= link_to "Create Project", new_project_path, class: "btn btn-primary" %>
-      </div>
-  </h1>
-</div>
+<%= page_header "Projects" do %>
+  <%= link_to "Create Project", new_project_path, class: "btn btn-primary" %>
+<% end %>
 
 <table class="table">
   <thead>

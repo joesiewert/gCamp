@@ -1,11 +1,8 @@
-<h1>
-  <%= "#{@user.first_name} #{@user.last_name}" %>
+<%= page_header @user.full_name do %>
   <% if current_user == @user || current_user.admin? %>
-    <div class="pull-right">
-      <%= link_to "Edit", edit_user_path, class: "btn btn-primary" %>
-    </div>
+    <%= link_to "Edit", edit_user_path, class: "btn btn-primary" %>
   <% end %>
-</h1>
+<% end %>
 
 <dl class="dl-horizontal">
   <dt>First name:</dt>

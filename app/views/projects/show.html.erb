@@ -1,11 +1,8 @@
-<h1>
-  <%= @project.name %>
+<%= page_header @project.name do %>
   <% if current_user.project_owner?(@project) || current_user.admin? %>
-    <div class="pull-right">
-      <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-primary" %>
-    </div>
+    <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-primary" %>
   <% end %>
-</h1>
+<% end %>
 
 <ol class="breadcrumb">
   <li><%= link_to "Projects", projects_path %></li>
