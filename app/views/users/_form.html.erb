@@ -45,6 +45,14 @@
         <%= f.password_field :password_confirmation, class: "form-control" %>
       </div>
     </div>
+    <div class="form-group">
+      <div class="col-sm-2">
+        <%= f.label :tracker_token, "Pivotal Tracker token", class: "control-label" %>
+      </div>
+      <div class="col-sm-5">
+        <%= f.text_field :tracker_token, class: "form-control" %>
+      </div>
+    </div>
     <% if current_user.admin? %>
       <div class="form-group">
         <div class="col-sm-2">

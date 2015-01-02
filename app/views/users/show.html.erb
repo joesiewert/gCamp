@@ -15,4 +15,7 @@
     <dt>Email:</dt>
     <dd><%= mail_to @user.email %></dd>
   <% end %>
+
+  <dt>Pivotal Tracker token:</dt>
+  <dd><%= @user.masked_tracker_token %></dd>
 </dl>

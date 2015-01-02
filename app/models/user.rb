@@ -28,4 +28,10 @@ class User < ActiveRecord::Base
     self.admin
   end
 
+  def masked_tracker_token
+    unless tracker_token.nil?
+      "#{tracker_token[0..3]}#{"*" * (tracker_token.length-4)}"
+    end
+  end
+
 end
