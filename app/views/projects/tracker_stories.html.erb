@@ -1,0 +1,31 @@
+<%= page_header "Stories for #{@tracker_project[:name]}" do %>
+  <strong>(showing first 500)</strong>
+<% end %>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr class="active">
+      <th><h4>Story</h4></th>
+      <th><h4>Estimate</h4></th>
+      <th><h4>Labels</h4></th>
+      <th><h4>Current State</h4></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tracker_stories.each do |story| %>
+      <tr>
+        <td><%= link_to story[:name], story[:url] %></td>
+        <td><%= story[:estimate] %></td>
+        <td>
+          <% labels = [] %>
+          <% story[:labels].each do |label| %>
+            <% labels << label[:name] %>
+          <% end %>
+          <%= labels.join", " %>
+        </td>
+        <td><%= story[:current_state].capitalize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

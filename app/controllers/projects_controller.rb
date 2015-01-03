@@ -5,6 +5,8 @@ class ProjectsController < ApplicationController
   before_action :check_ownership, only: [:edit, :update, :destroy]
 
   def index
+    tracker_api = TrackerAPI.new
+    @tracker_projects = tracker_api.projects(current_user.tracker_token)
   end
 
   def new
@@ -15,6 +17,12 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+  end
+
+  def tracker_stories
+    tracker_api = TrackerAPI.new
+    @tracker_project = tracker_api.project(params[:tracker_id], current_user.tracker_token)
+    @tracker_stories = tracker_api.stories(params[:tracker_id], current_user.tracker_token)
   end
 
   def create
