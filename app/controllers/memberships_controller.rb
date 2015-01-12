@@ -1,7 +1,7 @@
 class MembershipsController < ApplicationController
   before_action :set_project
   before_action :check_membership, only: [:index]
-  before_action :set_projects, only: [:index, :create]
+  before_action :set_projects
   before_action :check_ownership, only: [:create, :update]
 
   def index
@@ -30,11 +30,19 @@ class MembershipsController < ApplicationController
   def destroy
     @membership = @project.memberships.find(params[:id])
     if current_user.project_owner?(@project) || current_user.admin?
-      @membership.destroy
-      redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was removed successfully."
+      if @membership.destroy
+        redirect_to project_memberships_path(@project), notice: "#{@membership.user.full_name} was removed successfully."
+      else
+        flash.now[:alert] = "Unable to remove #{@membership.user.full_name}."
+        render :index
+      end
     elsif current_user == @membership.user
-      @membership.destroy
-      redirect_to project_path(@project), notice: "Your membership was removed successfully."
+      if @membership.destroy
+        redirect_to projects_path, notice: "Your membership was removed successfully."
+      else
+        flash.now[:alert] = "Unable to remove your membership."
+        render :index
+      end
     else
       raise AccessDenied
     end
